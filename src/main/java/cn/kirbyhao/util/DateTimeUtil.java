@@ -19,7 +19,7 @@ public class DateTimeUtil {
     /**
      * 精确到日的日期格式
      */
-    private static final String DATE_FORMAT_STR = "yyyy-MM-dd";
+    public static final String DATE_FORMAT_STR = "yyyy-MM-dd";
 
     /**
      * 精确到秒的日期格式
@@ -354,5 +354,17 @@ public class DateTimeUtil {
      */
     public static long getDifferenceTimeUnits(LocalDateTime older, LocalDateTime later, ChronoUnit timeUnit) {
         return older.until(later, timeUnit);
+    }
+
+    /**
+     * 用指定的模式创建时间
+     *
+     * @param timeStr 表示时间的字符串
+     * @param pattern 时间模式
+     * @return 创建的时间
+     */
+    public static LocalDateTime parse(String timeStr, String pattern) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        return LocalDateTime.parse(timeStr, formatter);
     }
 }
