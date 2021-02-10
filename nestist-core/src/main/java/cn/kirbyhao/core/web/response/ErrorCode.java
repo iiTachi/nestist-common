@@ -1,4 +1,4 @@
-package cn.kirbyhao.response;
+package cn.kirbyhao.core.web.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,9 +6,9 @@ import lombok.Getter;
 /**
  * 统一错误码
  *
- * @author Nestist KirbyHao
- * Created At 2020-11-22
- * @see APIResponse
+ * @author Lu Hao
+ * @date 2020-11-22
+ * @see ApiResponse
  */
 @AllArgsConstructor
 @Getter
@@ -30,6 +30,14 @@ public enum ErrorCode {
      * 权限不足
      */
     AUTH_NO_PERMISSION(-1001, "用户权限不足"),
+    /**
+     * 账密校验错误, 密码不正确
+     */
+    AUTH_WRONG_PASSWORD(-1002, "密码错误"),
+    /**
+     * 账密校验错误, 账号不存在
+     */
+    AUTH_NO_ACCOUNT(-1003, "账号不存在"),
 
     /*-------------------------------------------------------------*/
     /*------------------------ 参数问题方面 -------------------------*/
@@ -37,7 +45,7 @@ public enum ErrorCode {
     /**
      * 需要的参数为空
      */
-    PARAM_REQUEST_NOT_NULL(-2000, "必要的参数不能为空"),
+    PARAM_REQUEST_NOT_NULL(-2000, "缺少必要的参数"),
     /**
      * 参数类型错误
      */
@@ -93,21 +101,38 @@ public enum ErrorCode {
     /**
      * 类型强制转换错误
      */
-    LOGIC_CLASSIFICATION_CAST_ERROR(-4002, "类型强制转换错误");
+    LOGIC_CLASSIFICATION_CAST_ERROR(-4002, "类型强制转换错误"),
+
+    /*--------------------------------------------------------------*/
+    /*------------------------- 网络连接方面 -------------------------*/
+    /*--------------------------------------------------------------*/
+    /**
+     * 网络超时
+     */
+    NETWORK_TIMEOUT(-5000, "网络超时"),
+
+    /*--------------------------------------------------------------*/
+    /*------------------------- 其他未知错误 -------------------------*/
+    /*--------------------------------------------------------------*/
+    /**
+     * 其他未知错误
+     */
+    OTHER_ERROR(-10000, "其他未知错误");
 
     /**
      * 错误码
      */
-    Integer code;
+    private final Integer code;
     /**
      * 错误信息简述
      */
-    String message;
+    private final String message;
 
     /**
      * 通过code获取message
      *
      * @param code 错误码值
+     *
      * @return 错误信息简述
      */
     public String getMessageByCode(Integer code) {
@@ -126,6 +151,7 @@ public enum ErrorCode {
      * 通过message获取code
      *
      * @param message 错误信息简述
+     *
      * @return 错误码值，找不到会返回-10000
      */
     public Integer getCodeByMessage(String message) {

@@ -1,4 +1,4 @@
-package cn.kirbyhao.util;
+package cn.kirbyhao.core.util;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -11,7 +11,7 @@ import java.util.Set;
  * @author Nestist KirbyHao
  * Created At 2020-11-26
  */
-public class ClassCastUtil {
+public class ClassCastUtils {
 
     /**
      * 将Object对象转换为指定的List对象，若Object不是列表，则返回null
